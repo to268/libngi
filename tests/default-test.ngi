@@ -1,0 +1,7 @@
+test section ->
+value: this is a test
+str_test: "hello"
+
+ngi format test ->
+id: 1
+string: "hello"
