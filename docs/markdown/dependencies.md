@@ -4,7 +4,7 @@ To build the library, you will need: the make package, with a C compiler
 Porting the library will be easier in the future.
 
 # Generating docs
-To generate docs, you will need: doxygen, texlive (optional)
+To generate docs, you will need: doxygen, texlive (optional) and to update git submodules
 
 # Testing
 To run the test suite, you will need: [criterion](https://github.com/Snaipe/Criterion) and valgrind

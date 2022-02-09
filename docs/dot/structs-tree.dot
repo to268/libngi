@@ -1,0 +1,14 @@
+digraph structs_tree {
+    node [shape=box style="rounded,filled"]
+    header [fillcolor=orange label="ngi header"]
+    section1 [fillcolor=yellow label="ngi section 1"]
+    section2 [fillcolor=yellow label="ngi section 2"]
+    property1 [fillcolor=green label="ngi property 1"]
+    property2 [fillcolor=green label="ngi property 2"]
+    property3 [fillcolor=green label="ngi property 3"]
+    property4 [fillcolor=green label="ngi property 4"]
+
+    header -> {section1 section2}
+    section1 -> {property1 property2}
+    section2 -> {property3 property4}
+}

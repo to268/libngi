@@ -20,6 +20,9 @@
  *
  * @section DESCRIPTION
  *
+ * This is a sample tree that libngi will build:
+ * @dotfile structs-tree.dot
+ *
  * Contents:\n
  * Tree with dynamic allocation
  * and the basic API calls
