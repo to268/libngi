@@ -1,5 +1,10 @@
-/*
- * Copyright © 2021 Guillot Tony <tony.guillot@protonmail.com>
+/**
+ * @file libngi.h
+ * @brief The libgni core header
+ *
+ * @section LICENSE
+ *
+ * Copyright © 2022 Guillot Tony <tony.guillot@protonmail.com>
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
@@ -12,11 +17,8 @@
  *
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
- */
-/**
- * @file libngi.h
- * @brief The libgni core header
- * @copyright This project is released under the GNU General Public License 3.0 or later
+ *
+ * @section DESCRIPTION
  *
  * This is the only file to include when using the library
  */
@@ -68,7 +70,7 @@ typedef struct ngi_property ngi_property_t;
  *
  * @return A new ngi_header
  */
-ngi_header_t* ngi_open(const char* restrict filename, const char* mode);
+ngi_header_t* ngi_open(const char* filename, const char* mode);
 
 /**
  * @brief Closes a file and frees the ngi_header

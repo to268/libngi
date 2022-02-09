@@ -87,7 +87,6 @@ clean-docs:
 mrproper: clean clean-docs
 	echo "   RM        $(STATIC)"
 	echo "   RM        $(SHARED)"
-	echo "   RM        docs/doxygen/"
 	rm -f $(STATIC) $(SHARED) .gdb_history
 
 .SILENT:
