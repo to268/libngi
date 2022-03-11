@@ -28,7 +28,6 @@ all: $(STATIC) $(SHARED)
 
 release: CFLAGS=-Wall -std=gnu18 -O2 -DNDEBUG -fsanitize=leak -fsanitize=null \
 		-Werror=format-security -Wformat -Werror=implicit-function-declaration \
-		-Wno-array-bounds -Wno-maybe-uninitialized -Wno-stringop-overflow \
 		-fstack-protector-strong -fasynchronous-unwind-tables -pipe -I include/
 release: $(STATIC) $(SHARED)
 

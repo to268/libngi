@@ -373,7 +373,7 @@ ngi_section_t* ngi_section_alloc(ngi_header_t* ngi_header, const char* name)
     ngi_header->sections_len++;
 
     /* Add the name */
-    ngi_section->name_size = strlen(name);
+    ngi_section->name_size = strlen(name) + 1;
     ngi_section->name = malloc(sizeof(char) * ngi_section->name_size);
 
     if (ngi_section->name == NULL)
