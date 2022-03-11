@@ -646,6 +646,7 @@ static void ngi_balance_properties(ngi_section_t* ngi_section)
 #ifndef NDEBUG
 void ngi_print_map(const ngi_header_t* ngi_header)
 {
+    printf("Tree dump:\n");
     printf("Header with %d sections\n", ngi_header->sections_len);
 
     for (int s = 0; s < ngi_header->sections_len; s++) {

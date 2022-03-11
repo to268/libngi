@@ -1,7 +1,8 @@
 *.o
 *.a
 *.so
-tests/test-*
+*.elf
+tests/test*.c
 tests/test.ngi
 compile_commands.json
 .cache/

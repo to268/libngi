@@ -162,11 +162,12 @@ static ngi_property_t* ngi_parse_property(ngi_section_t* ngi_section, char* buff
 
     /* Allocate a new property and add the name and the value */
     ngi_property_t* ngi_property = ngi_property_alloc(ngi_section, strlen(name), strlen(value));
-    ngi_set_property_name(ngi_property, name);
-    ngi_set_property_value(ngi_property, value);
 
     if (ngi_property == NULL)
         return NULL;
+
+    ngi_set_property_name(ngi_property, name);
+    ngi_set_property_value(ngi_property, value);
 
     return ngi_property;
 }

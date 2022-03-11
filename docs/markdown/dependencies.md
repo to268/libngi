@@ -7,4 +7,4 @@ Porting the library will be easier in the future.
 To generate docs, you will need: doxygen, texlive (optional) and to update git submodules
 
 # Testing
-To run the test suite, you will need: [criterion](https://github.com/Snaipe/Criterion) and valgrind
+To run the test suite, you will need valgrind and to checkout the utest.h submodule

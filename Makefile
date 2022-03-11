@@ -3,14 +3,14 @@ LD=ld
 AR=ar
 
 CFLAGS=-std=gnu18 -Og -g3 -fPIC -fasynchronous-unwind-tables -pipe -I include/
-LDFLAGS=
+LDFLAGS=-L.
 ARFLAGS=rcs
 
 C_FILES=$(shell find ./src -type f -name "*.c")
 OBJS=$(C_FILES:.c=.o)
 
 TEST_FILES=$(wildcard tests/*.c)
-TEST_BINS=$(TEST_FILES:.c= )
+TEST_BINS=$(TEST_FILES:.c=.elf)
 
 STATIC=libngi.a
 SHARED=libngi.so
@@ -45,9 +45,10 @@ $(SHARED): $(OBJS)
 
 check: $(STATIC) $(SHARED) $(TEST_BINS)
 	cp -f tests/default-test.ngi tests/test.ngi
-	for test in $(TEST_BINS); do $(LD_PATH) valgrind ./$$test; done
+	for test in $(TEST_BINS); do $(LD_PATH) ./$$test; done
+	#for test in $(TEST_BINS); do $(LD_PATH) valgrind ./$$test; done
 
-$(TEST_BINS): CFLAGS=-Wall -O2 -fPIC -I include/ -L. -lngi -lcriterion
+$(TEST_BINS): CFLAGS=-Wall -O2 -fPIC -I include/ -I tests/utest.h/ -L. -Wno-unused-function -lngi
 $(TEST_BINS): $(STATIC) $(SHARED) $(TEST_FILES)
 	$(CC) $(CFLAGS) $(TEST_FILES) -o $@
 

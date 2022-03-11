@@ -13,5 +13,21 @@ jobs:
     steps:
     - uses: actions/checkout@v2
 
+    - name: Download packages
+      run: |
+        sudo apt update
+        sudo apt install build-essential gcc-10 g++-10 valgrind doxygen doxygen-latex graphviz -y
+        sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-10 100 --slave /usr/bin/g++ g++ /usr/bin/g++-10 --slave /usr/bin/gcov gcov /usr/bin/gcov-10
+        sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-9 90 --slave /usr/bin/g++ g++ /usr/bin/g++-9 --slave /usr/bin/gcov gcov /usr/bin/gcov-9
+
+    - name: Git Sumbodule Update
+      run: git submodule update --init --recursive
+
     - name: Build library
-      run: make
+      run: make && sudo make install
+
+    - name: Build documentation
+      run: make docs
+
+    - name: Run tests
+      run: make check
