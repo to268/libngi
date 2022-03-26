@@ -24,7 +24,7 @@ jobs:
       run: git submodule update --init --recursive
 
     - name: Build library
-      run: make && sudo make install
+      run: make
 
     - name: Build documentation
       run: make docs
