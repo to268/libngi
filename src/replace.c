@@ -29,13 +29,13 @@
 #include "libngi/libngi_internal.h"
 
 void ngi_section_replace(ngi_header_t* ngi_header, ngi_section_t* ngi_section,
-                            const char* new_name);
-void ngi_property_replace(ngi_header_t* ngi_header, ngi_property_t* ngi_property,
-                            const char* new_name, const char* new_value);
+                         const char* new_name);
+void ngi_property_replace(ngi_header_t* ngi_header,
+                          ngi_property_t* ngi_property, const char* new_name,
+                          const char* new_value);
 
 void ngi_section_replace(ngi_header_t* ngi_header, ngi_section_t* ngi_section,
-                            const char* new_name)
-{
+                         const char* new_name) {
     /* Get the file descriptor */
     FILE* fd = ngi_get_file(ngi_header);
 
@@ -50,9 +50,9 @@ void ngi_section_replace(ngi_header_t* ngi_header, ngi_section_t* ngi_section,
     ngi_dump_tree_to_file(ngi_header, fd);
 }
 
-void ngi_property_replace(ngi_header_t* ngi_header, ngi_property_t* ngi_property,
-                            const char* new_name, const char* new_value)
-{
+void ngi_property_replace(ngi_header_t* ngi_header,
+                          ngi_property_t* ngi_property, const char* new_name,
+                          const char* new_value) {
     /* Get the file descriptor */
     FILE* fd = ngi_get_file(ngi_header);
 

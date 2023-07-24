@@ -32,14 +32,15 @@
 
 long ngi_find_section(ngi_header_t* ngi_header, const char* name);
 long ngi_find_next_section(ngi_header_t* ngi_header);
-long ngi_find_property(ngi_header_t* ngi_header, const char* section, const char* name);
+long ngi_find_property(ngi_header_t* ngi_header, const char* section,
+                       const char* name);
 long ngi_find_next_property(ngi_header_t* ngi_header, const char* section,
                             long previous_offset);
 
-long ngi_find_section(ngi_header_t* ngi_header, const char* name)
-{
+long ngi_find_section(ngi_header_t* ngi_header, const char* name) {
     FILE* fd = ngi_get_file(ngi_header);
-    if (fd == NULL) return -1;
+    if (fd == NULL)
+        return -1;
 
     char buff[NGI_MAX_LINE_LENGTH];
     long previous_line_offset = 0;
@@ -64,11 +65,10 @@ long ngi_find_section(ngi_header_t* ngi_header, const char* name)
     return -1;
 }
 
-
-long ngi_find_next_section(ngi_header_t* ngi_header)
-{
+long ngi_find_next_section(ngi_header_t* ngi_header) {
     FILE* fd = ngi_get_file(ngi_header);
-    if (fd == NULL) return -1;
+    if (fd == NULL)
+        return -1;
 
     char buff[NGI_MAX_LINE_LENGTH];
     long previous_line_offset = 0;
@@ -85,10 +85,11 @@ long ngi_find_next_section(ngi_header_t* ngi_header)
     return -1;
 }
 
-long ngi_find_property(ngi_header_t* ngi_header, const char* section, const char* name)
-{
+long ngi_find_property(ngi_header_t* ngi_header, const char* section,
+                       const char* name) {
     FILE* fd = ngi_get_file(ngi_header);
-    if (fd == NULL) return -1;
+    if (fd == NULL)
+        return -1;
 
     long offset = ngi_find_section(ngi_header, section);
     long previous_line_offset = 0;
@@ -126,15 +127,14 @@ long ngi_find_property(ngi_header_t* ngi_header, const char* section, const char
 }
 
 long ngi_find_next_property(ngi_header_t* ngi_header, const char* section,
-                            long previous_offset)
-{
+                            long previous_offset) {
     FILE* fd = ngi_get_file(ngi_header);
-    if (fd == NULL) return -1;
+    if (fd == NULL)
+        return -1;
 
     /* Check if a valid offset is provided */
-    long offset = previous_offset <= 0 ?
-                ngi_find_section(ngi_header, section) :
-                previous_offset;
+    long offset = previous_offset <= 0 ? ngi_find_section(ngi_header, section)
+                                       : previous_offset;
 
     if (offset < 0)
         return -1;

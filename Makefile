@@ -48,7 +48,7 @@ check: $(STATIC) $(SHARED) $(TEST_BINS)
 	for test in $(TEST_BINS); do $(LD_PATH) ./$$test; done
 	#for test in $(TEST_BINS); do $(LD_PATH) valgrind ./$$test; done
 
-$(TEST_BINS): CFLAGS=-Wall -O2 -fPIC -I include/ -I tests/utest.h/ -L. -Wno-unused-function
+$(TEST_BINS): CFLAGS=-Wall -O2 -fPIC -I include/ -I tests/ -L. -Wno-unused-function
 $(TEST_BINS): $(STATIC) $(SHARED) $(TEST_FILES)
 	$(CC) $(CFLAGS) $(TEST_FILES) -o $@ -lngi
 

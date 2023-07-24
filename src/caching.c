@@ -34,34 +34,31 @@ int ngi_cache_file(ngi_header_t* ngi_header);
 int ngi_recache_file(ngi_header_t* ngi_header);
 
 /* Recache sub functions */
-static inline int
-create_section_if_needeed(ngi_header_t* ngi_header,
-                        ngi_section_t* ngi_section,
-                        uint processed_sections, uint processed_properties,
-                        uint max_sections, char* buff);
-static inline void
-remove_unused_sections(ngi_header_t* ngi_header,
-                    uint processed_sections, uint max_sections);
+static inline int create_section_if_needeed(ngi_header_t* ngi_header,
+                                            ngi_section_t* ngi_section,
+                                            uint processed_sections,
+                                            uint processed_properties,
+                                            uint max_sections, char* buff);
+static inline void remove_unused_sections(ngi_header_t* ngi_header,
+                                          uint processed_sections,
+                                          uint max_sections);
 
 static inline ngi_property_t*
-create_property_if_needeed(ngi_header_t* ngi_header,
-                        ngi_section_t* ngi_section,
-                        uint processed_properties, int max_properties,
-                        const char* name, const char* value);
+create_property_if_needeed(ngi_header_t* ngi_header, ngi_section_t* ngi_section,
+                           uint processed_properties, int max_properties,
+                           const char* name, const char* value);
 
-static inline int
-remove_unused_properties(ngi_header_t* ngi_header,
-                        ngi_section_t* ngi_section,
-                        uint processed_properties, int max_properties);
+static inline int remove_unused_properties(ngi_header_t* ngi_header,
+                                           ngi_section_t* ngi_section,
+                                           uint processed_properties,
+                                           int max_properties);
 
-inline int ngi_cache_file(ngi_header_t* ngi_header)
-{
+inline int ngi_cache_file(ngi_header_t* ngi_header) {
     int res = ngi_parse_file(ngi_header);
     return res;
 }
 
-int ngi_recache_file(ngi_header_t* ngi_header)
-{
+int ngi_recache_file(ngi_header_t* ngi_header) {
     FILE* fd = ngi_get_file(ngi_header);
     char buff[NGI_MAX_LINE_LENGTH];
 
@@ -75,7 +72,7 @@ int ngi_recache_file(ngi_header_t* ngi_header)
     uint max_properties = 0;
 
     /* Store the current section and the current property */
-    ngi_section_t*  current_section = NULL;
+    ngi_section_t* current_section = NULL;
     ngi_property_t* current_property = NULL;
 
     /* Go to the beginning of the file to cache the whole file */
@@ -88,16 +85,15 @@ int ngi_recache_file(ngi_header_t* ngi_header)
 
             /* Remove old properties */
             if (remove_unused_properties(ngi_header, current_section,
-                                         processed_properties, max_properties))
-            {
+                                         processed_properties,
+                                         max_properties)) {
                 continue;
             }
 
             /* Check if we need to create a new section */
-            if (create_section_if_needeed(ngi_header, current_section,
-                                        processed_sections, processed_properties,
-                                        max_sections, buff))
-            {
+            if (create_section_if_needeed(
+                    ngi_header, current_section, processed_sections,
+                    processed_properties, max_sections, buff)) {
                 continue;
             }
 
@@ -128,12 +124,13 @@ int ngi_recache_file(ngi_header_t* ngi_header)
             ngi_strip_property_name(name);
             ngi_strip_property_value(value);
 
-            current_property = create_property_if_needeed(ngi_header, current_section,
-                                                        processed_properties, max_properties,
-                                                        name, value);
+            current_property = create_property_if_needeed(
+                ngi_header, current_section, processed_properties,
+                max_properties, name, value);
             if (current_property == NULL)
                 /* Get the next property to process */
-                current_property = ngi_get_property(current_section, processed_properties);
+                current_property =
+                    ngi_get_property(current_section, processed_properties);
             else
                 continue;
 
@@ -150,7 +147,6 @@ int ngi_recache_file(ngi_header_t* ngi_header)
             /* We have processed a property */
             processed_properties++;
         }
-
     }
 
     /* Check if we need to remove unused sections */
@@ -170,12 +166,11 @@ int ngi_recache_file(ngi_header_t* ngi_header)
  *
  * @return NGI_STATUS_FAILED or NGI_STATUS_SUCCESS
  */
-static inline int
-create_section_if_needeed(ngi_header_t* ngi_header,
-                        ngi_section_t* ngi_section,
-                        uint processed_sections, uint processed_properties,
-                        uint max_sections, char* buff)
-{
+static inline int create_section_if_needeed(ngi_header_t* ngi_header,
+                                            ngi_section_t* ngi_section,
+                                            uint processed_sections,
+                                            uint processed_properties,
+                                            uint max_sections, char* buff) {
     /* Check if we need to create a new section */
     if (processed_sections >= max_sections) {
         ngi_section = ngi_create_section(ngi_header, buff);
@@ -199,10 +194,9 @@ create_section_if_needeed(ngi_header_t* ngi_header,
  * @param[in] processed
  * @param[in] max
  */
-static inline void
-remove_unused_sections(ngi_header_t* ngi_header,
-                    uint processed_sections, uint max_sections)
-{
+static inline void remove_unused_sections(ngi_header_t* ngi_header,
+                                          uint processed_sections,
+                                          uint max_sections) {
     if (processed_sections < max_sections) {
         for (int i = processed_sections; i < max_sections; i++)
             ngi_section_free(ngi_header, ngi_get_section(ngi_header, i));
@@ -222,15 +216,14 @@ remove_unused_sections(ngi_header_t* ngi_header,
  * @return The newly created ngi_property
  */
 static inline ngi_property_t*
-create_property_if_needeed(ngi_header_t* ngi_header,
-                        ngi_section_t* ngi_section,
-                        uint processed_properties, int max_properties,
-                        const char* name, const char* value)
+create_property_if_needeed(ngi_header_t* ngi_header, ngi_section_t* ngi_section,
+                           uint processed_properties, int max_properties,
+                           const char* name, const char* value)
 
 {
-
     if (processed_properties >= max_properties) {
-        ngi_property_t* ngi_property = ngi_create_property(ngi_header, ngi_section, name, value);
+        ngi_property_t* ngi_property =
+            ngi_create_property(ngi_header, ngi_section, name, value);
         processed_properties++;
 
         /* Return the property to trigger the continue keyword */
@@ -240,7 +233,6 @@ create_property_if_needeed(ngi_header_t* ngi_header,
     /* Return 0 to do the rest of the loop */
     return NULL;
 }
-
 
 /**
  * @brief Removes all unused properties/removed properties (**private**)
@@ -252,11 +244,10 @@ create_property_if_needeed(ngi_header_t* ngi_header,
  *
  * @return NGI_STATUS_FAILED or NGI_STATUS_SUCCESS
  */
-static inline int
-remove_unused_properties(ngi_header_t* ngi_header,
-                        ngi_section_t* ngi_section,
-                        uint processed_properties, int max_properties)
-{
+static inline int remove_unused_properties(ngi_header_t* ngi_header,
+                                           ngi_section_t* ngi_section,
+                                           uint processed_properties,
+                                           int max_properties) {
     if (processed_properties < max_properties) {
         for (int i = processed_properties; i < max_properties; i++)
             ngi_property_free(ngi_section, ngi_get_property(ngi_section, i));

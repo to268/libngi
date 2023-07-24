@@ -35,7 +35,7 @@ extern "C" {
  * @param[in] new_name
  */
 void ngi_section_replace(ngi_header_t* ngi_header, ngi_section_t* ngi_section,
-                            const char* new_name);
+                         const char* new_name);
 
 /**
  * @brief Replaces the proprety name and/or value
@@ -47,8 +47,9 @@ void ngi_section_replace(ngi_header_t* ngi_header, ngi_section_t* ngi_section,
  * @param[in] new_name
  * @param[in] new_value
  */
-void ngi_property_replace(ngi_header_t* ngi_header, ngi_property_t* ngi_property,
-                            const char* new_name, const char* new_value);
+void ngi_property_replace(ngi_header_t* ngi_header,
+                          ngi_property_t* ngi_property, const char* new_name,
+                          const char* new_value);
 
 #ifdef __cplusplus
 }

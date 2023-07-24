@@ -35,9 +35,9 @@ extern "C" {
 #include "replace.h"
 
 /* Version informations */
-#define NGI_MAJOR   0
-#define NGI_MINOR   9
-#define NGI_PATCH   0
+#define NGI_MAJOR 0
+#define NGI_MINOR 9
+#define NGI_PATCH 0
 
 /* Build type */
 #ifndef NDEBUG
@@ -49,14 +49,14 @@ extern "C" {
 #endif /* NDEBUG */
 
 /* Maximum values */
-#define NGI_MAX_SECTIONS        8192
-#define NGI_MAX_PROPERTIES      8192
-#define NGI_MAX_NAME_LENGTH     4096
-#define NGI_MAX_LINE_LENGTH     8192
+#define NGI_MAX_SECTIONS    8192
+#define NGI_MAX_PROPERTIES  8192
+#define NGI_MAX_NAME_LENGTH 4096
+#define NGI_MAX_LINE_LENGTH 8192
 
 /* Returned status code */
-#define NGI_STATUS_FAILED       0
-#define NGI_STATUS_SUCCESS      1
+#define NGI_STATUS_FAILED  0
+#define NGI_STATUS_SUCCESS 1
 
 typedef struct ngi_header ngi_header_t;
 typedef struct ngi_section ngi_section_t;
@@ -95,7 +95,8 @@ void ngi_dump_tree_to_file(ngi_header_t* ngi_header, FILE* fd);
  *
  * @return The appropriate ngi_section
  */
-ngi_section_t* ngi_get_section(const ngi_header_t* ngi_header, const int section);
+ngi_section_t* ngi_get_section(const ngi_header_t* ngi_header,
+                               const int section);
 
 /**
  * @brief Gets the ngi_section by his name
@@ -106,7 +107,7 @@ ngi_section_t* ngi_get_section(const ngi_header_t* ngi_header, const int section
  * @return The appropriate ngi_section
  */
 ngi_section_t* ngi_get_section_by_name(const ngi_header_t* ngi_header,
-                                    const char* name);
+                                       const char* name);
 
 /**
  * @brief Gets the ngi_property at the choosen index
@@ -117,7 +118,7 @@ ngi_section_t* ngi_get_section_by_name(const ngi_header_t* ngi_header,
  * @return The appropriate ngi_property
  */
 ngi_property_t* ngi_get_property(const ngi_section_t* ngi_section,
-                                const int property);
+                                 const int property);
 
 /**
  * @brief Gets the ngi_property by his name
@@ -128,8 +129,7 @@ ngi_property_t* ngi_get_property(const ngi_section_t* ngi_section,
  * @return The appropriate ngi_property
  */
 ngi_property_t* ngi_get_property_by_name(const ngi_section_t* ngi_section,
-                                        const char* name);
-
+                                         const char* name);
 
 /**
  * @brief Gets the ngi_section index
@@ -140,7 +140,7 @@ ngi_property_t* ngi_get_property_by_name(const ngi_section_t* ngi_section,
  * @return The index of the ngi_section
  */
 int ngi_get_section_index(const ngi_header_t* ngi_header,
-                        const ngi_section_t* ngi_section);
+                          const ngi_section_t* ngi_section);
 
 /**
  * @brief Gets the ngi_section name
@@ -169,7 +169,7 @@ int ngi_get_section_name_size(const ngi_section_t* ngi_section);
  * @return The index of the ngi_property
  */
 int ngi_get_property_index(const ngi_section_t* ngi_section,
-                        const ngi_property_t* ngi_property);
+                           const ngi_property_t* ngi_property);
 
 /**
  * @brief Gets the ngi_sections number
@@ -188,7 +188,6 @@ int ngi_get_sections_number(const ngi_header_t* ngi_header);
  * @return The number of ngi_properties
  */
 int ngi_get_properties_number(const ngi_section_t* ngi_section);
-
 
 /**
  * @brief Gets the ngi_property name
@@ -234,7 +233,6 @@ int ngi_get_property_value_size(const ngi_property_t* ngi_property);
  * @return The ngi_section parent
  */
 ngi_section_t* ngi_get_property_parent(const ngi_property_t* ngi_property);
-
 
 /**
  * @brief Gets the file descriptor of the file

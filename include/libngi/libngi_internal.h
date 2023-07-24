@@ -33,8 +33,8 @@ extern "C" {
 #include "type.h"
 #include "write.h"
 
-#define SSCANF_PATTERN          "%[a-zA-Z0-9_ ]"
-#define MAX_PATTERN_LENGTH      30
+#define SSCANF_PATTERN     "%[a-zA-Z0-9_ ]"
+#define MAX_PATTERN_LENGTH 30
 
 /* Core */
 
@@ -57,7 +57,8 @@ ngi_section_t* ngi_section_alloc(ngi_header_t* ngi_header, const char* name);
  *
  * @return The allocated ngi_property
  */
-ngi_property_t* ngi_property_alloc(ngi_section_t* ngi_section, int name_size, int value_size);
+ngi_property_t* ngi_property_alloc(ngi_section_t* ngi_section, int name_size,
+                                   int value_size);
 
 /**
  * @brief Reallocates a ngi_section (**internal**)
@@ -79,7 +80,7 @@ int ngi_section_realloc(ngi_section_t* ngi_section, int new_name_size);
  * @return NGI_STATUS_FAILED or NGI_STATUS_SUCCESS
  */
 int ngi_property_realloc(ngi_property_t* ngi_property, int new_name_size,
-                        int new_value_size);
+                         int new_value_size);
 
 /**
  * @brief Frees a ngi_section (**internal**)
@@ -95,7 +96,8 @@ void ngi_section_free(ngi_header_t* ngi_header, ngi_section_t* ngi_section);
  * @param[in] ngi_section
  * @param[in] ngi_property
  */
-void ngi_property_free(ngi_section_t* ngi_section, ngi_property_t* ngi_property);
+void ngi_property_free(ngi_section_t* ngi_section,
+                       ngi_property_t* ngi_property);
 
 /**
  * @brief Sets the ngi_section name (**internal**)

@@ -32,8 +32,8 @@ extern "C" {
  * PROPERTY_TKN: the token used to define a property
  *              which is located between the name and the value
  */
-#define SECTION_TKN     " ->"
-#define PROPERTY_TKN    ": "
+#define SECTION_TKN  " ->"
+#define PROPERTY_TKN ": "
 
 #ifdef __cplusplus
 }

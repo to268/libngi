@@ -29,24 +29,30 @@
 int ngi_write_section(FILE* fd, const char* name);
 int ngi_write_property(FILE* fd, const char* name, const char* value);
 
-int ngi_write_section(FILE* fd, const char* name)
-{
+int ngi_write_section(FILE* fd, const char* name) {
     if (ftell(fd) != 0)
-        if ((fwrite("\n", 1, 1, fd)) <= 0) return 0;
+        if ((fwrite("\n", 1, 1, fd)) <= 0)
+            return 0;
 
-    if ((fwrite(name, strlen(name), 1, fd)) <= 0) return 0;
-    if ((fwrite(SECTION_TKN, strlen(SECTION_TKN), 1, fd)) <= 0) return 0;
-    if ((fwrite("\n", 1, 1, fd)) <= 0) return 0;
+    if ((fwrite(name, strlen(name), 1, fd)) <= 0)
+        return 0;
+    if ((fwrite(SECTION_TKN, strlen(SECTION_TKN), 1, fd)) <= 0)
+        return 0;
+    if ((fwrite("\n", 1, 1, fd)) <= 0)
+        return 0;
 
     return 1;
 }
 
-int ngi_write_property(FILE* fd, const char* name, const char* value)
-{
-    if ((fwrite(name, strlen(name), 1, fd)) <= 0) return 0;
-    if ((fwrite(PROPERTY_TKN, strlen(PROPERTY_TKN), 1, fd)) <= 0) return 0;
-    if ((fwrite(value, strlen(value), 1, fd)) <= 0) return 0;
-    if ((fwrite("\n", 1, 1, fd)) <= 0) return 0;
+int ngi_write_property(FILE* fd, const char* name, const char* value) {
+    if ((fwrite(name, strlen(name), 1, fd)) <= 0)
+        return 0;
+    if ((fwrite(PROPERTY_TKN, strlen(PROPERTY_TKN), 1, fd)) <= 0)
+        return 0;
+    if ((fwrite(value, strlen(value), 1, fd)) <= 0)
+        return 0;
+    if ((fwrite("\n", 1, 1, fd)) <= 0)
+        return 0;
 
     return 1;
 }

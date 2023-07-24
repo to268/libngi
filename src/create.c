@@ -32,26 +32,28 @@
 
 int ngi_create(const char* restrict filename);
 ngi_section_t* ngi_create_section(ngi_header_t* ngi_header, const char* name);
-ngi_property_t* ngi_create_property(ngi_header_t* ngi_header, ngi_section_t* ngi_section,
+ngi_property_t* ngi_create_property(ngi_header_t* ngi_header,
+                                    ngi_section_t* ngi_section,
                                     const char* name, const char* value);
 
-int ngi_create(const char* restrict filename)
-{
+int ngi_create(const char* restrict filename) {
     if ((access(filename, F_OK)) != 0) {
         return 0;
     }
 
     FILE* fd = fopen(filename, "w+");
 
-    if (fd == NULL) return 0;
-    if ((fclose(fd) != 0)) return 0;
+    if (fd == NULL)
+        return 0;
+    if ((fclose(fd) != 0))
+        return 0;
 
     return 1;
 }
 
-ngi_section_t* ngi_create_section(ngi_header_t* ngi_header, const char* name)
-{
-    if (ngi_header == NULL) return 0;
+ngi_section_t* ngi_create_section(ngi_header_t* ngi_header, const char* name) {
+    if (ngi_header == NULL)
+        return 0;
 
     FILE* fd = ngi_get_file(ngi_header);
 
@@ -64,20 +66,22 @@ ngi_section_t* ngi_create_section(ngi_header_t* ngi_header, const char* name)
     return ngi_section_alloc(ngi_header, name);
 }
 
-ngi_property_t* ngi_create_property(ngi_header_t* ngi_header, ngi_section_t* ngi_section,
-                                    const char* name, const char* value)
-{
-    if (ngi_header == NULL || ngi_section == NULL) return 0;
+ngi_property_t* ngi_create_property(ngi_header_t* ngi_header,
+                                    ngi_section_t* ngi_section,
+                                    const char* name, const char* value) {
+    if (ngi_header == NULL || ngi_section == NULL)
+        return 0;
 
     FILE* fd = ngi_get_file(ngi_header);
 
     fseek(fd, ngi_find_section(ngi_header, ngi_get_section_name(ngi_section)),
-            SEEK_SET);
+          SEEK_SET);
 
     /* Write the property in the file */
     ngi_write_property(fd, name, value);
 
     /* Add the property in memory */
-    return ngi_property_alloc(ngi_section, NGI_MAX_NAME_LENGTH, NGI_MAX_LINE_LENGTH);
-;
+    return ngi_property_alloc(ngi_section, NGI_MAX_NAME_LENGTH,
+                              NGI_MAX_LINE_LENGTH);
+    ;
 }

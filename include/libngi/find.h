@@ -55,7 +55,8 @@ long ngi_find_next_section(ngi_header_t* ngi_header);
  *
  * @return The file offset
  */
-long ngi_find_property(ngi_header_t* ngi_header, const char* section, const char* name);
+long ngi_find_property(ngi_header_t* ngi_header, const char* section,
+                       const char* name);
 
 /**
  * @brief Finds the next ngi_property in the file (**internal**)

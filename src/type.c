@@ -36,8 +36,7 @@ void ngi_strip_property_name(char* buff);
 void ngi_strip_property_value(char* buff);
 
 /* Return the type of the line */
-enum ngi_type ngi_get_type(const char* buff)
-{
+enum ngi_type ngi_get_type(const char* buff) {
     if (strstr(buff, SECTION_TKN) > 0) {
         return SECTION;
     } else if (strstr(buff, PROPERTY_TKN) > 0) {
@@ -46,8 +45,7 @@ enum ngi_type ngi_get_type(const char* buff)
     return UNKNOWN;
 }
 
-void ngi_strip_section_name(char* buff)
-{
+void ngi_strip_section_name(char* buff) {
     /* Store the pattern to apply */
     char pattern[MAX_PATTERN_LENGTH] = SSCANF_PATTERN;
 
@@ -58,8 +56,7 @@ void ngi_strip_section_name(char* buff)
     buff[strlen(buff) - 1] = '\0';
 }
 
-void ngi_strip_property_name(char* buff)
-{
+void ngi_strip_property_name(char* buff) {
     /* Store the pattern to apply */
     char pattern[MAX_PATTERN_LENGTH] = SSCANF_PATTERN;
 
@@ -67,9 +64,9 @@ void ngi_strip_property_name(char* buff)
     sscanf(buff, strcat(pattern, PROPERTY_TKN), buff);
 }
 
-void ngi_strip_property_value(char* buff)
-{
-    /* Remove the part starting at the beginning of the line to the end of the token */
+void ngi_strip_property_value(char* buff) {
+    /* Remove the part starting at the beginning of the line to the end of the
+     * token */
     char* tkn = strstr(buff, PROPERTY_TKN);
     tkn += strlen(PROPERTY_TKN);
 

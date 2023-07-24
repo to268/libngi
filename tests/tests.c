@@ -17,7 +17,7 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <string.h>
-#include <utest.h>
+#include "utest.h"
 #include "libngi/libngi.h"
 #include "libngi/libngi_internal.h"
 
@@ -30,15 +30,12 @@ struct ngi_fixture {
     FILE* file;
 };
 
-
 UTEST_F_SETUP(ngi_fixture) {
     utest_fixture->header = ngi_open(TEST_FILENAME, "r+");
     utest_fixture->file = ngi_get_file(utest_fixture->header);
 }
 
-UTEST_F_TEARDOWN(ngi_fixture) {
-    ngi_close(utest_fixture->header);
-}
+UTEST_F_TEARDOWN(ngi_fixture) { ngi_close(utest_fixture->header); }
 
 /* Strip tests */
 UTEST_F(ngi_fixture, strip_section_name) {
@@ -76,8 +73,8 @@ UTEST_F(ngi_fixture, find_section) {
 
 /* TODO: Fix this test
 UTEST_F(ngi_fixture, find_property) {
-    long res = ngi_find_property(utest_fixture->header, "ngi format test", "data");
-    ASSERT_GE(res, 0);
+    long res = ngi_find_property(utest_fixture->header, "ngi format test",
+"data"); ASSERT_GE(res, 0);
 
     res = ngi_find_property(utest_fixture->header, "ngi format test", "data");
     ASSERT_LT(res, 0);
@@ -93,24 +90,25 @@ UTEST_F(ngi_fixture, recache) {
 
 /* Create tests */
 UTEST_F(ngi_fixture, create_section) {
-    ngi_section_t* section =  ngi_create_section(utest_fixture->header, "prop_sec");
+    ngi_section_t* section =
+        ngi_create_section(utest_fixture->header, "prop_sec");
     ASSERT_STREQ(ngi_get_section_name(section), "prop_sec");
 
     ngi_section_t* section2 = ngi_get_section(utest_fixture->header, 2);
     ASSERT_TRUE(section == section2);
 
     long res = ngi_get_sections_number(utest_fixture->header);
-    ASSERT_EQ(res,  3);
+    ASSERT_EQ(res, 3);
 }
 
 /* TODO: Fix these tests
 UTEST_F(ngi_fixture, create_property) {
-    ngi_section_t* section = ngi_get_section_by_name(utest_fixture->header, "prop_sec");
-    ASSERT_STREQ(ngi_get_section_name(section), "prop_sec");
+    ngi_section_t* section = ngi_get_section_by_name(utest_fixture->header,
+"prop_sec"); ASSERT_STREQ(ngi_get_section_name(section), "prop_sec");
 
-    ngi_property_t* property = ngi_create_property(utest_fixture->header, section, "hello", "value");
-    ASSERT_STREQ(ngi_get_property_name(property), "hello");
-    ASSERT_STREQ(ngi_get_property_value(property), "value");
+    ngi_property_t* property = ngi_create_property(utest_fixture->header,
+section, "hello", "value"); ASSERT_STREQ(ngi_get_property_name(property),
+"hello"); ASSERT_STREQ(ngi_get_property_value(property), "value");
 
     ngi_property_t* property2 = ngi_get_property(section, 0);
     ASSERT_TRUE(property == property2);
@@ -119,18 +117,18 @@ UTEST_F(ngi_fixture, create_property) {
     ASSERT_EQ(res, 1);
 }
 
-// Replace tests //
+// Replace tests
 UTEST_F(ngi_fixture, replace_section) {
-    ngi_section_t* section =  ngi_get_section_by_name(utest_fixture->header, "prop_sec");
-    ASSERT_STREQ(ngi_get_section_name(section), "prop_sec");
+    ngi_section_t* section =  ngi_get_section_by_name(utest_fixture->header,
+"prop_sec"); ASSERT_STREQ(ngi_get_section_name(section), "prop_sec");
 
     ngi_section_replace(utest_fixture->header, section, "new prop");
     ASSERT_STREQ(ngi_get_section_name(section), "new prop");
 }
 
 UTEST_F(ngi_fixture, replace_property) {
-    ngi_section_t* section =  ngi_get_section_by_name(utest_fixture->header, "new prop");
-    ASSERT_STREQ(ngi_get_section_name(section), "new prop");
+    ngi_section_t* section =  ngi_get_section_by_name(utest_fixture->header,
+"new prop"); ASSERT_STREQ(ngi_get_section_name(section), "new prop");
 
     ngi_property_t* property = ngi_get_property_by_name(section, "hello");
     ASSERT_STREQ(ngi_get_property_name(property), "hello");

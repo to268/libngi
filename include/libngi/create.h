@@ -47,7 +47,8 @@ ngi_section_t* ngi_create_section(ngi_header_t* ngi_header, const char* name);
  *
  * @return The newly created ngi_property
  */
-ngi_property_t* ngi_create_property(ngi_header_t* ngi_header, ngi_section_t* ngi_section,
+ngi_property_t* ngi_create_property(ngi_header_t* ngi_header,
+                                    ngi_section_t* ngi_section,
                                     const char* name, const char* value);
 
 #ifdef __cplusplus
